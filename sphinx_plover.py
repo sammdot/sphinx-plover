@@ -13,6 +13,7 @@ obj_re = re.compile(
     \[(?P<param>[A-Za-z_]+)\]
   | (?P<literal>[A-Za-z_]+)
   | (?P<punc>[\{\}^:/=\(\)\*-\|<>~\?!#&\$])
+  | (?P<space> +)
   """,
   re.VERBOSE,
 )
@@ -35,13 +36,15 @@ class PloverObject(ObjectDescription):
 
   def handle_signature(self, sig, signode):
     nodes = []
-    for param, literal, punc in obj_re.findall(sig):
+    for param, literal, punc, other in obj_re.findall(sig):
       if param:
         nodes.append(addnodes.desc_sig_name("", param))
       elif literal:
         nodes.append(addnodes.desc_name("", literal))
       elif punc:
         nodes.append(addnodes.desc_addname("", punc))
+      elif space:
+        nodes.append(addnodes.desc_sig_space())
     signode += nodes
     return sig
 
