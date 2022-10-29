@@ -13,7 +13,7 @@ obj_re = re.compile(
     \[(?P<param>[A-Za-z_]+)\]
   | (?P<literal>[A-Za-z_]+)
   | (?P<punc>[\{\}^:/=\(\)\*-\|<>~\?!#&\$])
-  | (?P<space> +)
+  | (?P<space>\s+)
   """,
   re.VERBOSE,
 )
