@@ -36,7 +36,7 @@ class PloverObject(ObjectDescription):
 
   def handle_signature(self, sig, signode):
     nodes = []
-    for param, literal, punc, other in obj_re.findall(sig):
+    for param, literal, punc, space in obj_re.findall(sig):
       if param:
         nodes.append(addnodes.desc_sig_name("", param))
       elif literal:
